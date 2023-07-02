@@ -3,10 +3,13 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
+use App\Traits\JoinQueryParams;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class NiveauRessource extends JsonResource
 {
+
+    use JoinQueryParams;
     /**
      * Transform the resource into an array.
      *
@@ -14,6 +17,7 @@ class NiveauRessource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $this->test();
         return [
             'name'=> $this->libelle,
             'classe' => ClasseRessource::collection($this->classes)
