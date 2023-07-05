@@ -4,6 +4,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EleveController;
 use App\Http\Controllers\NiveauController;
+use App\Http\Controllers\DisciplineController;
+use App\Http\Controllers\EvaluationController;
+use App\Http\Controllers\AnneeScolaireController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,11 +19,17 @@ use App\Http\Controllers\NiveauController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
-Route::get('niveaux', [NiveauController::class, 'index']);
-Route::get('niveaux/{id}', [NiveauController::class, 'find']);
 
-Route::apiResource('/eleve', EleveController::class)->only('store');
+Route::resource('niveaux', NiveauController::class);
+
+
+Route::apiResource('eleves', EleveController::class);
+Route::apiResource('disciplines', DisciplineController::class)->only([
+    'index',
+    'store'
+]);
+
+Route::apiResource('anneescolaire', AnneeScolaireController::class);
+Route::apiResource('evaluations', EvaluationController::class);
+Route::apiResource('classes/{id}/eleves', ClasseController::class);

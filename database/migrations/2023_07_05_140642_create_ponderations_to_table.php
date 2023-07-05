@@ -1,7 +1,8 @@
 <?php
 
-use App\Models\Eleve;
 use App\Models\Classe;
+use App\Models\Discipline;
+use App\Models\Evaluation;
 use App\Models\AnneeScolaire;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
@@ -14,12 +15,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('inscriptions', function (Blueprint $table) {
+        Schema::create('ponderations', function (Blueprint $table) {
             $table->id();
-            $table->string('date_inscription');
-            $table->foreignIdFor(Classe::class)->constrained();
-            $table->foreignIdFor(AnneeScolaire::class)->constrained();
-            $table->foreignIdFor(Eleve::class)->constrained();
+            $table->integer('note_max');
+            $table->foreignIdFor(Discipline::class);
+            $table->foreignIdFor(Evaluation::class);
+            $table->foreignIdFor(Classe::class);
+            $table->foreignIdFor(AnneeScolaire::class);
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('inscriptions');
+        Schema::dropIfExists('ponderations');
     }
 };

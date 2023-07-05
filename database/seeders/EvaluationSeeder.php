@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Niveau;
+use App\Models\Evaluation;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-class NiveauSeeder extends Seeder
+class EvaluationSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,10 +14,9 @@ class NiveauSeeder extends Seeder
     public function run(): void
     {
         $data = [
-            ['libelle' =>'ELEMENTAIRE'],
-            ['libelle' =>'COLLÉGE'],
-            ['libelle' =>'LYCÉE']
-            ];
-            Niveau::insert($data);
+            ['libelle'=> 'Examen'],
+            ['libelle'=> 'Ressource']
+        ];
+        Evaluation::insert($data);
     }
 }

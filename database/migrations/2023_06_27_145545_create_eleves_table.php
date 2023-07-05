@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('eleves', function (Blueprint $table) {
             $table->id();
-            $table->string('nom');
-            $table->string('prenom');
+            $table->string('last_name');
+            $table->string('first_name');
             $table->dateTime('datedenaissance')->nullable();
             $table->string('lieudenaissance')->nullable();
-            $table->integer('profil');
             $table->string('sexe');
+            $table->boolean('etat')->defaultvalue(true);
+            $table->string('statut');
             $table->timestamps();
         });
     }

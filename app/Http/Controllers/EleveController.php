@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Eleve;
 use Illuminate\Http\Request;
+use App\Http\Resources\EleveResource;
 
 class EleveController extends Controller
 {
@@ -11,18 +13,42 @@ class EleveController extends Controller
      */
     public function index()
     {
-        //
+        return EleveResource::collection(Eleve::all());
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request) 
+    public function store(Request $request)
     {
         
-        Return Eleve::create([
-            
+        $eleve = Eleve::create([
+            "last_name" => $request->nom,
+            "first_name" => $request->prenom,
+            "datedenaissance" => $request->date_naissance,
+            "lieudenaissance" => $request->lieu,
+            "sexe" => $request->sexe,
+            "profile" => $request->profil,
+            "niveau_id" => $request->classe_id,
+            "classe_id" => $request->classe_id,
+            "etat" => $request->etat,
+            "numero" => $request->numero
         ]);
+        
+
+        
+
+
+
+        if ($eleve) {
+            // L'élève est associé à une classe existante
+            Inscription::create([
+                "date_inscription" => now(),
+                "annee_scolaire_id" => 1, // Remplacez par l'ID de l'année scolaire appropriée
+                "classe_id" => $request->classe_id,
+                "eleve_id" => $eleve->id
+            ]);
+        }
     }
 
     /**
@@ -30,7 +56,7 @@ class EleveController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return EleveResource::make($id);
     }
 
     /**

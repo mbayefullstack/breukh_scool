@@ -6,6 +6,6 @@ trait JoinQueryParams
 {
     public function test()
     {
-        dd('Khadija');
+        // dd('Khadija');
     }
 }

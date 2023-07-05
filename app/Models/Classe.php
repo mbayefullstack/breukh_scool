@@ -10,7 +10,7 @@ class Classe extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id', 'libelle', 'niveau_id'];
+    protected $fillable = ['libelle', 'niveau_id'];
 
     //il y A au moins un niveau.
     public function niveau():BelongsTo

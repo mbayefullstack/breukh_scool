@@ -14,8 +14,7 @@ class NiveauController extends Controller
      */
     public function index()
     {
-        $affiche = Niveau::all();
-        return NiveauRessource::collection($affiche);
+        return NiveauRessource::collection(Niveau::all());
     }
 
     /**
@@ -24,7 +23,7 @@ class NiveauController extends Controller
     public function find()
     {
         $affiche = Niveau::all();
-        return NiveauRessource::find($id);
+        return NiveauRessource::find($affiche);
     }
 
     /**
@@ -32,7 +31,11 @@ class NiveauController extends Controller
      */
     public function store(StoreNiveauRequest $request)
     {
-        //
+          $niveau=  Niveau::create([
+                'libelle' => $request->libelle,
+            ]);
+
+            return new NiveauRessource($niveau);
     }
 
     /**
